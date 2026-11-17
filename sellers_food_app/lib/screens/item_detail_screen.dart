@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sellers_food_app/global/global.dart';
 import 'package:sellers_food_app/splash_screen/splash_screen.dart';
@@ -34,7 +33,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
         Navigator.push(context,
             MaterialPageRoute(builder: ((context) => const SplashScreen())));
 
-        Fluttertoast.showToast(msg: "Item Deleted");
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Item Deleted")),
+        );
       },
     );
   }

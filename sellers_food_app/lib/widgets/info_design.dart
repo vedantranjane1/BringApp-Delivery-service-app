@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sellers_food_app/models/menus.dart';
 
@@ -28,7 +27,9 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
         .doc(menuID)
         .delete();
 
-    Fluttertoast.showToast(msg: "Menu Deleted");
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Menu Deleted")),
+    );
   }
 
   @override

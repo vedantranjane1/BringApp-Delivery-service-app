@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/cart_item_counter.dart';
 import 'package:users_food_app/screens/cart_screen.dart';
 
-class MyAppBar extends StatefulWidget with PreferredSizeWidget {
+class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final String? sellerUID;
   MyAppBar({Key? key, this.bottom, this.sellerUID}) : super(key: key);
@@ -27,10 +27,7 @@ class _MyAppBarState extends State<MyAppBar> {
           gradient: LinearGradient(
             begin: FractionalOffset(-2.0, 0.0),
             end: FractionalOffset(5.0, -1.0),
-            colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFFFAC898),
-            ],
+            colors: [Color(0xFFFFFFFF), Color(0xFFFAC898)],
           ),
         ),
       ),
@@ -46,42 +43,37 @@ class _MyAppBarState extends State<MyAppBar> {
                   ),
                 );
               },
-              icon: const Icon(
-                Icons.shopping_cart,
-                color: Colors.orange,
-              ),
+              icon: const Icon(Icons.shopping_cart, color: Colors.orange),
             ),
             Positioned(
               child: Stack(
                 children: [
-                  const Icon(
-                    Icons.brightness_1,
-                    size: 20,
-                    color: Colors.green,
-                  ),
+                  const Icon(Icons.brightness_1, size: 20, color: Colors.green),
                   Positioned(
                     top: 3,
                     right: 4,
                     child: Center(
                       child: Consumer<CartItemCounter>(
-                          builder: (context, counter, c) {
-                        return Text(
-                          counter.count.toString(),
-                          style: GoogleFonts.lato(
-                            textStyle: const TextStyle(
+                        builder: (context, counter, c) {
+                          return Text(
+                            counter.count.toString(),
+                            style: GoogleFonts.lato(
+                              textStyle: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          ),
-                        );
-                      }),
+                                color: Colors.black,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
           ],
-        )
+        ),
       ],
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new_rounded),

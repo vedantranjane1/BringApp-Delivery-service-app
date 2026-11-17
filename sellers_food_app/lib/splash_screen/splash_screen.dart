@@ -25,9 +25,12 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(
       const Duration(seconds: 6),
       () async {
+
+        if (!mounted) return;
+
         //if the user is already authenticate send user to home screen
         if (firebaseAuth.currentUser != null) {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (c) => const HomeScreen(),

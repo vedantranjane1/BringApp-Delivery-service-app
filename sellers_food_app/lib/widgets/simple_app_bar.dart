@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SimpleAppBar extends StatelessWidget {
+class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   String? title;
   SimpleAppBar({Key? key, this.bottom, this.title}) : super(key: key);
@@ -22,10 +22,7 @@ class SimpleAppBar extends StatelessWidget {
           gradient: LinearGradient(
             begin: FractionalOffset(-2.0, 0.0),
             end: FractionalOffset(5.0, -1.0),
-            colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFFFAC898),
-            ],
+            colors: [Color(0xFFFFFFFF), Color(0xFFFAC898)],
           ),
         ),
       ),
@@ -41,10 +38,7 @@ class SimpleAppBar extends StatelessWidget {
       ),
       centerTitle: true,
       automaticallyImplyLeading: true,
-      iconTheme: const IconThemeData(
-        color: Colors.black,
-        size: 35,
-      ),
+      iconTheme: const IconThemeData(color: Colors.black, size: 35),
     );
   }
 }

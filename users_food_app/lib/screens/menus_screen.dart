@@ -31,10 +31,7 @@ class _MenusScreenState extends State<MenusScreen> {
             gradient: LinearGradient(
               begin: FractionalOffset(-2.0, 0.0),
               end: FractionalOffset(5.0, -1.0),
-              colors: [
-                Color(0xFFFFFFFF),
-                Color(0xFFFAC898),
-              ],
+              colors: [Color(0xFFFFFFFF), Color(0xFFFAC898)],
             ),
           ),
         ),
@@ -45,9 +42,7 @@ class _MenusScreenState extends State<MenusScreen> {
 
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (c) => const SplashScreen(),
-              ),
+              MaterialPageRoute(builder: (c) => const SplashScreen()),
             );
 
             Fluttertoast.showToast(msg: "Cart has been cleared.");
@@ -72,10 +67,7 @@ class _MenusScreenState extends State<MenusScreen> {
           gradient: LinearGradient(
             begin: FractionalOffset(-2.0, 0.0),
             end: FractionalOffset(5.0, -1.0),
-            colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFFFAC898),
-            ],
+            colors: [Color(0xFFFFFFFF), Color(0xFFFAC898)],
           ),
         ),
         child: CustomScrollView(
@@ -92,20 +84,17 @@ class _MenusScreenState extends State<MenusScreen> {
               builder: (context, snapshot) {
                 return !snapshot.hasData
                     ? SliverToBoxAdapter(
-                        child: Center(
-                          child: circularProgress(),
-                        ),
+                        child: Center(child: circularProgress()),
                       )
-                    : SliverStaggeredGrid.countBuilder(
-                        staggeredTileBuilder: (c) =>
-                            const StaggeredTile.count(1, 1.5),
+                    : SliverMasonryGrid.count(
                         crossAxisCount: 2,
                         mainAxisSpacing: 1,
                         crossAxisSpacing: 0,
                         itemBuilder: (context, index) {
                           Menus model = Menus.fromJson(
-                              snapshot.data!.docs[index].data()!
-                                  as Map<String, dynamic>);
+                            snapshot.data!.docs[index].data()!
+                                as Map<String, dynamic>,
+                          );
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: MenusDesignWidget(
@@ -114,7 +103,7 @@ class _MenusScreenState extends State<MenusScreen> {
                             ),
                           );
                         },
-                        itemCount: snapshot.data!.docs.length,
+                        childCount: snapshot.data!.docs.length,
                       );
               },
             ),

@@ -27,12 +27,12 @@ class SaveAddressScreen extends StatelessWidget {
   getUserLocationAddress() async {
     //get current location
     Position newPosition = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
+      locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
     );
 
     position = newPosition;
 
-    placemarks = await placemarkFromCoordinates(
+    placemarks = await Geocoding().placemarkFromCoordinates(
       position!.latitude,
       position!.longitude,
     );
@@ -58,9 +58,7 @@ class SaveAddressScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: SimpleAppBar(
-          title: "iFood",
-        ),
+        child: SimpleAppBar(title: "iFood"),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -85,16 +83,14 @@ class SaveAddressScreen extends StatelessWidget {
                 .doc(DateTime.now().millisecondsSinceEpoch.toString())
                 .set(model)
                 .then((value) {
-              Fluttertoast.showToast(msg: "New Address has been saved.");
+                  Fluttertoast.showToast(msg: "New Address has been saved.");
 
-              formKey.currentState!.reset();
-            });
+                  formKey.currentState!.reset();
+                });
           }
         },
         label: const Text("Save"),
-        icon: const Icon(
-          Icons.check,
-        ),
+        icon: const Icon(Icons.check),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -122,15 +118,11 @@ class SaveAddressScreen extends StatelessWidget {
               title: SizedBox(
                 width: 250,
                 child: TextField(
-                  style: const TextStyle(
-                    color: Colors.black,
-                  ),
+                  style: const TextStyle(color: Colors.black),
                   controller: _locationController,
                   decoration: const InputDecoration(
                     hintText: "What's your Address?",
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
               ),
@@ -141,10 +133,7 @@ class SaveAddressScreen extends StatelessWidget {
                 "Get my Address",
                 style: TextStyle(color: Colors.white),
               ),
-              icon: const Icon(
-                Icons.location_on,
-                color: Colors.red,
-              ),
+              icon: const Icon(Icons.location_on, color: Colors.red),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -163,33 +152,18 @@ class SaveAddressScreen extends StatelessWidget {
               key: formKey,
               child: Column(
                 children: [
-                  MyTextField(
-                    hint: "Name",
-                    controller: _name,
-                  ),
-                  MyTextField(
-                    hint: "Phone Number",
-                    controller: _phoneNumber,
-                  ),
-                  MyTextField(
-                    hint: "City",
-                    controller: _city,
-                  ),
-                  MyTextField(
-                    hint: "State / Country",
-                    controller: _state,
-                  ),
-                  MyTextField(
-                    hint: "Address Line",
-                    controller: _flatNumber,
-                  ),
+                  MyTextField(hint: "Name", controller: _name),
+                  MyTextField(hint: "Phone Number", controller: _phoneNumber),
+                  MyTextField(hint: "City", controller: _city),
+                  MyTextField(hint: "State / Country", controller: _state),
+                  MyTextField(hint: "Address Line", controller: _flatNumber),
                   MyTextField(
                     hint: "Complete Address",
                     controller: _completeAddress,
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

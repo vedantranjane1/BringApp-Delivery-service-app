@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
-class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
+class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   String? title;
   SimpleAppBar({Key? key, this.bottom, this.title}) : super(key: key);
@@ -21,10 +21,7 @@ class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
           gradient: LinearGradient(
             begin: FractionalOffset(-1.0, 0.0),
             end: FractionalOffset(4.0, -1.0),
-            colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFFFAC898),
-            ],
+            colors: [Color(0xFFFFFFFF), Color(0xFFFAC898)],
           ),
         ),
       ),

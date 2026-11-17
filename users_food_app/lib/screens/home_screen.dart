@@ -41,10 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           gradient: LinearGradient(
             begin: FractionalOffset(-2.0, 0.0),
             end: FractionalOffset(5.0, -1.0),
-            colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFFFAC898),
-            ],
+            colors: [Color(0xFFFFFFFF), Color(0xFFFAC898)],
           ),
         ),
         child: CustomScrollView(
@@ -61,10 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   gradient: LinearGradient(
                     begin: FractionalOffset(-1.0, 0.0),
                     end: FractionalOffset(4.0, -1.0),
-                    colors: [
-                      Color(0xFFFFFFFF),
-                      Color(0xFFFAC898),
-                    ],
+                    colors: [Color(0xFFFFFFFF), Color(0xFFFAC898)],
                   ),
                 ),
                 child: FlexibleSpaceBar(
@@ -72,9 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Restaurants',
                     style: GoogleFonts.lato(
                       textStyle: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                   centerTitle: false,
@@ -108,9 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             //Carausel
-            const SliverToBoxAdapter(
-              child: UserInformation(),
-            ),
+            const SliverToBoxAdapter(child: UserInformation()),
 
             SliverToBoxAdapter(
               child: Padding(
@@ -122,33 +115,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: MediaQuery.of(context).size.width,
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SellerCarouselWidget(),
-                      ItemsAvatarCarousel(),
-                    ],
+                    children: [SellerCarouselWidget(), ItemsAvatarCarousel()],
                   ),
                 ),
               ),
             ),
             StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection("sellers").snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection("sellers")
+                  .snapshots(),
               builder: (context, snapshot) {
                 return !snapshot.hasData
                     ? SliverToBoxAdapter(
-                        child: Center(
-                          child: circularProgress(),
-                        ),
+                        child: Center(child: circularProgress()),
                       )
-                    : SliverStaggeredGrid.countBuilder(
-                        staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
+                    : SliverMasonryGrid.count(
                         crossAxisCount: 1,
                         mainAxisSpacing: 1,
                         crossAxisSpacing: 1,
                         itemBuilder: (context, index) {
                           Sellers smodel = Sellers.fromJson(
-                              snapshot.data!.docs[index].data()!
-                                  as Map<String, dynamic>);
+                            snapshot.data!.docs[index].data()!
+                                as Map<String, dynamic>,
+                          );
                           return Padding(
                             padding: const EdgeInsets.all(8),
                             child: SellersDesignWidget(
@@ -157,10 +146,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           );
                         },
-                        itemCount: snapshot.data!.docs.length,
+                        childCount: snapshot.data!.docs.length,
                       );
               },
-            )
+            ),
           ],
         ),
       ),
