@@ -28,12 +28,14 @@ class UserLocation {
     }
 
     Position newPosition = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+      ),
     );
 
     position = newPosition;
 
-    placeMarks = await placemarkFromCoordinates(
+    placeMarks = await Geocoding().placemarkFromCoordinates(
       position!.latitude,
       position!.longitude,
     );
